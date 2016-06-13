@@ -1,8 +1,13 @@
 import twitter
-api = twitter.Api(consumer_key='ScfUowDWDMsjpFwOnL7244ui7',
-                  consumer_secret='tlXMzT9CyBwng9tVtNWfDRDiny092kCByf7KoIU6VnSw1z6WFD',
-                  access_token_key='16139414-VVhO9d8zcLdcyNS3sMHx16u2yg2jVVOE3G4icauIy',
-                  access_token_secret='FsVIW6BQMRb3qXvGYFgyAWBTlMsClUagzNRo2WeBK1Ahq')
+import json
+
+with open('apiPass.json') as data_file:
+    apiData = json.load(data_file)
+
+api = twitter.Api(consumer_key = apiData['passes']['consumer_key'].encode('ascii', 'ignore'),
+                  consumer_secret = apiData['passes']['consumer_secret'].encode('ascii', 'ignore'),
+                  access_token_key = apiData['passes']['access_token_key'].encode('ascii', 'ignore'),
+                  access_token_secret = apiData['passes']['access_token_secret'].encode('ascii', 'ignore'))
 
 with open('/usr/local/bin/pythonpic/curr.txt', 'r') as myfile:
     data = myfile.read().replace('\n', '')
